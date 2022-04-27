@@ -1,10 +1,19 @@
 object Versions {
-    const val navVersion = "2.4.1"
+    const val navVersion = "2.4.2"
     const val roomVersion = "2.4.1"
     const val moshiVersion = "1.13.0"
     const val retrofitVersion = "2.9.0"
     const val okhttpVersion = "4.9.3"
     const val coroutineVersion = "1.4.3"
+    const val hiltVersion = "2.40"
+    const val kotlinVersion = "1.6.10"
+}
+
+object SdkVersion {
+
+    const val compileSdk = 31
+    const val minSdk = 26
+    const val targetSdk = 31
 }
 
 object Libraries {
@@ -24,17 +33,20 @@ object Libraries {
         }
 
         object Hilt {
-            const val core = "com.google.dagger:hilt-android:2.38.1"
-            const val compiler = "com.google.dagger:hilt-android-compiler:2.38.1"
+            const val core = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
+            const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
+            const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}"
         }
 
         object Kotlin {
-            const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:1.6.10"
+            const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
         }
 
         object Coroutines {
-            const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutineVersion}"
-            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutineVersion}"
+            const val android =
+                "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutineVersion}"
+            const val core =
+                "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutineVersion}"
         }
 
         object Lifecycle {
@@ -45,10 +57,13 @@ object Libraries {
         }
 
         object Navigation {
-            const val fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navVersion}"
+            const val fragment =
+                "androidx.navigation:navigation-fragment-ktx:${Versions.navVersion}"
             const val ui = "androidx.navigation:navigation-ui-ktx:${Versions.navVersion}"
             const val dynamicFeatures =
                 "androidx.navigation:navigation-dynamic-features-fragment:${Versions.navVersion}"
+            const val sageArgsPlugin =
+                "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navVersion}"
         }
 
         const val gson = "com.google.code.gson:gson:2.8.8"
@@ -69,7 +84,8 @@ object Libraries {
             object Moshi {
                 const val adapters = "com.squareup.moshi:moshi-adapters:${Versions.moshiVersion}"
                 const val core = "com.squareup.moshi:moshi:${Versions.moshiVersion}"
-                const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshiVersion}"
+                const val codegen =
+                    "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshiVersion}"
                 const val kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}"
             }
 
