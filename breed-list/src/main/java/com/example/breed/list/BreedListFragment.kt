@@ -1,31 +1,47 @@
 package com.example.breed.list
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.breed.list.databinding.BreedListFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BreedListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = BreedListFragment()
-    }
-
-    private lateinit var viewModel: BreedListViewModel
+    private lateinit var binding: BreedListFragmentBinding
+    private val viewModel: BreedListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.breed_list_fragment, container, false)
+    ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = BreedListFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BreedListViewModel::class.java)
-        // TODO: Use the ViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycle.addObserver(viewModel)
+        observeViewStates()
+        observeViewEvents()
+        with(binding) {
+            breedList.layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun observeViewEvents() {
+
+    }
+
+    private fun observeViewStates() {
+
     }
 
 }
