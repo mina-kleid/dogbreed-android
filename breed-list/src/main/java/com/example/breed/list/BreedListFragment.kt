@@ -11,7 +11,7 @@ import com.example.breed.list.databinding.BreedListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BreedListFragment : Fragment() {
+public class BreedListFragment : Fragment() {
 
     private lateinit var binding: BreedListFragmentBinding
     private val viewModel: BreedListViewModel by viewModels()
