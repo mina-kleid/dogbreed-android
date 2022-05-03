@@ -11,17 +11,23 @@ import javax.inject.Inject
 @HiltViewModel
 internal class BreedListViewModel @Inject constructor(private val breedListRepository: BreedListRepository) :
     ViewModel(),
-    LifecycleObserver {
+    DefaultLifecycleObserver {
 
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Loading)
     val viewState: Flow<ViewState> get() = _viewState
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun loadBreeds() {
+
+    override fun onCreate(owner: LifecycleOwner) {
         _viewState.value = ViewState.Loading
         viewModelScope.launch {
             _viewState.value = when (val result = breedListRepository.loadBreeds()) {
-                is BreedListRepository.BreedListRepositoryResult.Success -> ViewState.Content(result.breeds)
+                is BreedListRepository.BreedListRepositoryResult.Success -> {
+                    if (result.breeds.isEmpty()) {
+                        ViewState.Empty
+                    } else {
+                        ViewState.Content(result.breeds)
+                    }
+                }
                 is BreedListRepository.BreedListRepositoryResult.Error -> ViewState.Error
             }
         }
@@ -31,5 +37,6 @@ internal class BreedListViewModel @Inject constructor(private val breedListRepos
         data class Content(val breeds: List<Breed>) : ViewState()
         object Loading : ViewState()
         object Error : ViewState()
+        object Empty : ViewState()
     }
 }

@@ -15,7 +15,9 @@ public class BreedListViewHolder(
         val subBreeds: TextView = itemView.findViewById(R.id.subBreeds)
 
         breedName.text = breed.name
-        subBreeds.text = breed.subBreeds.size.toString()
+        subBreeds.text = itemView
+            .context
+            .getString(R.string.sub_breeds_label, breed.subBreeds.size.toString())
 
         itemView.setOnClickListener { itemClickListener.onItemClicked(breed) }
     }

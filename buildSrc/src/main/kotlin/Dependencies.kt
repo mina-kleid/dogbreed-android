@@ -51,9 +51,9 @@ object Libraries {
 
         object Lifecycle {
 
-            const val common = "androidx.lifecycle:lifecycle-common-java8:2.3.1"
-            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+            const val common = "androidx.lifecycle:lifecycle-common-java8:2.4.0"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
         }
 
         object Navigation {

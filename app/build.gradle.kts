@@ -34,6 +34,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":breed-item"))
+    implementation(project(":breed-list"))
+
     implementation(Libraries.App.AndroidX.appcompat)
     implementation(Libraries.App.AndroidX.material)
     implementation(Libraries.App.AndroidX.viewPager2)
