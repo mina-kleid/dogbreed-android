@@ -16,3 +16,4 @@ rootProject.name = "DogBreed"
 include ':app'
 include ':network'
 include ':breed-list'
+include ':common-models'
