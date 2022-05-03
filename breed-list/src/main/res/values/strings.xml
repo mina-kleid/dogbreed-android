@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="list_empty">Sorry! no movies found for your movies</string>
+    <string name="list_empty">Sorry! no breeds found</string>
     <string name="list_error">There is an error, Please try again later</string>
     <string name="list_loading">Loading</string>
 </resources>

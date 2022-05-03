@@ -23,7 +23,7 @@ object Libraries {
             const val activity = "androidx.activity:activity-ktx:1.2.3"
             const val annotations = "androidx.annotation:annotation:1.2.0"
             const val appcompat = "androidx.appcompat:appcompat:1.3.1"
-            const val constraint = "androidx.constraintlayout:constraintlayout:2.0.4"
+            const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
             const val core = "androidx.core:core-ktx:1.6.0"
             const val viewBinding = "androidx.databinding:viewbinding:4.2.0@aar"
             const val fragment = "androidx.fragment:fragment-ktx:1.6.0"

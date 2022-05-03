@@ -8,6 +8,8 @@ dependencies {
 
     implementation(project(":common-models"))
 
+    implementation(Libraries.App.AndroidX.recyclerView)
+    implementation(Libraries.App.AndroidX.constraintLayout)
     implementation(Libraries.App.Kotlin.stdlib)
     implementation(Libraries.App.Hilt.core)
 
