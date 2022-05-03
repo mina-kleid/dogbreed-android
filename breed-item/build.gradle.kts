@@ -7,6 +7,7 @@ plugins {
 dependencies {
 
     implementation(project(":common-models"))
+    implementation(project(":common-ui"))
 
     implementation(Libraries.App.AndroidX.recyclerView)
     implementation(Libraries.App.AndroidX.constraintLayout)

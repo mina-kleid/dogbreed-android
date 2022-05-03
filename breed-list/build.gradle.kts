@@ -8,6 +8,7 @@ dependencies {
 
     implementation(project(":breed-item"))
     implementation(project(":common-models"))
+    implementation(project(":common-ui"))
     implementation(project(":network"))
 
     implementation(Libraries.App.AndroidX.appcompat)
