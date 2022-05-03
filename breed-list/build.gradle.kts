@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
 
+    implementation(project(":common-models"))
     implementation(project(":network"))
 
     implementation(Libraries.App.AndroidX.appcompat)
