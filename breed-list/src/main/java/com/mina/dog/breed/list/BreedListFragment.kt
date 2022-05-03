@@ -1,4 +1,4 @@
-package com.example.breed.list
+package com.mina.dog.breed.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
