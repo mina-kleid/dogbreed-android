@@ -2,9 +2,12 @@ package com.mina.dog.breed.storage
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(primaryKeys = ["name"], tableName = "Breed")
+@Entity(tableName = "Breed")
 internal data class BreedEntity(
-    val name: String,
+    @PrimaryKey val name: String,
+    val breeds: List<String>,
+    val images: List<String>,
     @ColumnInfo(defaultValue = "false") val isFavorite: Boolean = false,
 )

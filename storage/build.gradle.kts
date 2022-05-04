@@ -22,6 +22,7 @@ dependencies {
     implementation(Libraries.App.Room.runtime)
     implementation(Libraries.App.Room.ktx)
     implementation(Libraries.App.Hilt.core)
+    implementation(Libraries.App.Kotlin.serialization)
 
     kapt(Libraries.App.Room.annotationProcessor)
     kapt(Libraries.App.Hilt.compiler)

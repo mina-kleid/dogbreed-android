@@ -40,6 +40,7 @@ object Libraries {
 
         object Kotlin {
             const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
         }
 
         object Coroutines {
