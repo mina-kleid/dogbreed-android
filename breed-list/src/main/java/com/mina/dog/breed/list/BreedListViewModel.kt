@@ -3,9 +3,11 @@ package com.mina.dog.breed.list
 import androidx.lifecycle.*
 import com.mina.dog.breed.common.models.Breed
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,15 +22,17 @@ internal class BreedListViewModel @Inject constructor(private val breedListRepos
     override fun onCreate(owner: LifecycleOwner) {
         _viewState.value = ViewState.Loading
         viewModelScope.launch {
-            _viewState.value = when (val result = breedListRepository.loadBreeds()) {
-                is BreedListRepository.BreedListRepositoryResult.Success -> {
-                    if (result.breeds.isEmpty()) {
-                        ViewState.Empty
-                    } else {
-                        ViewState.Content(result.breeds)
+            withContext(Dispatchers.IO) {
+                _viewState.value = when (val result = breedListRepository.loadBreeds()) {
+                    is BreedListRepository.BreedListRepositoryResult.Success -> {
+                        if (result.breeds.isEmpty()) {
+                            ViewState.Empty
+                        } else {
+                            ViewState.Content(result.breeds)
+                        }
                     }
+                    is BreedListRepository.BreedListRepositoryResult.Error -> ViewState.Error
                 }
-                is BreedListRepository.BreedListRepositoryResult.Error -> ViewState.Error
             }
         }
     }
