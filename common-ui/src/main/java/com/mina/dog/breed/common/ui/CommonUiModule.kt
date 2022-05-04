@@ -16,5 +16,6 @@ object CommonUiModule {
         RequestOptions()
             .placeholder(R.drawable.ic_image_loading)
             .error(R.drawable.ic_image_loading_error)
+            .fallback(R.drawable.ic_image_loading_error)
             .fitCenter()
 }

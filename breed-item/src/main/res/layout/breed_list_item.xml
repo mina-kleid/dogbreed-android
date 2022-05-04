@@ -8,6 +8,14 @@
     android:focusable="true"
     android:layout_marginBottom="@dimen/gap">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/image_width"
+        android:layout_height="@dimen/image_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:contentDescription="@null"/>
 
     <TextView
         android:id="@+id/breedName"
@@ -15,9 +23,11 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:lines="1"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/gap"
+        android:layout_marginEnd="@dimen/half_gap"
+        app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/subBreeds"

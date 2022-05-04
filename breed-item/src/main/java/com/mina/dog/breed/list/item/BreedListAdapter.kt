@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import com.mina.dog.breed.common.models.Breed
 import javax.inject.Inject
 
 public class BreedListAdapter @Inject constructor(
     private val itemClickListener: BreedListItemClickListener,
+    private val requestOptions: RequestOptions
 ) : RecyclerView.Adapter<BreedListViewHolder>() {
 
     private val breeds: MutableList<Breed> = mutableListOf()
@@ -16,7 +18,7 @@ public class BreedListAdapter @Inject constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedListViewHolder {
         val itemView: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.breed_list_item, parent, false)
-        return BreedListViewHolder(itemView)
+        return BreedListViewHolder(itemView, requestOptions)
     }
 
     override fun onBindViewHolder(holder: BreedListViewHolder, position: Int) {
