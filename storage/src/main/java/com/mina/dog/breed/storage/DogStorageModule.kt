@@ -14,7 +14,8 @@ public object DogStorageModule {
 
     @Provides
     @Reusable
-    internal fun database(application: Application): RoomDatabase =
+    fun breedDao(application: Application): BreedDao =
         DogDatabaseBuilder(application = application)
             .build()
+            .breedDao()
 }
