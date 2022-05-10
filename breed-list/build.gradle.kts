@@ -22,4 +22,10 @@ dependencies {
     implementation(Libraries.App.Hilt.core)
 
     kapt(Libraries.App.Hilt.compiler)
+
+    testImplementation(Libraries.Test.Mockito.android)
+    testImplementation(Libraries.Test.Mockito.kotlin)
+    testImplementation(Libraries.Test.Kotlin.coroutines)
+    testImplementation(Libraries.Test.junit)
+    testImplementation(Libraries.Test.turbine)
 }
