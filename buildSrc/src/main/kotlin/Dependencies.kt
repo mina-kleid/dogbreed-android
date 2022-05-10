@@ -3,7 +3,6 @@ object Versions {
     const val roomVersion = "2.4.1"
     const val moshiVersion = "1.13.0"
     const val retrofitVersion = "2.9.0"
-    const val okhttpVersion = "4.9.3"
     const val coroutineVersion = "1.4.3"
     const val hiltVersion = "2.40"
     const val kotlinVersion = "1.6.10"
@@ -20,7 +19,6 @@ object Libraries {
     object App {
 
         object AndroidX {
-            const val activity = "androidx.activity:activity-ktx:1.2.3"
             const val annotations = "androidx.annotation:annotation:1.2.0"
             const val appcompat = "androidx.appcompat:appcompat:1.3.1"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
@@ -43,13 +41,6 @@ object Libraries {
             const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
         }
 
-        object Coroutines {
-            const val android =
-                "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutineVersion}"
-            const val core =
-                "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutineVersion}"
-        }
-
         object Lifecycle {
 
             const val common = "androidx.lifecycle:lifecycle-common-java8:2.4.0"
@@ -66,8 +57,6 @@ object Libraries {
             const val sageArgsPlugin =
                 "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navVersion}"
         }
-
-        const val gson = "com.google.code.gson:gson:2.8.8"
 
         object Room {
             const val runtime = "androidx.room:room-runtime:${Versions.roomVersion}"
@@ -89,11 +78,6 @@ object Libraries {
                     "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshiVersion}"
                 const val kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}"
             }
-
-            object OkHttp {
-                const val core = "com.squareup.okhttp3:okhttp:${Versions.okhttpVersion}"
-            }
-
         }
 
         const val glide = "com.github.bumptech.glide:glide:4.11.0"
