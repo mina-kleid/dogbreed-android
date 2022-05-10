@@ -1,6 +1,7 @@
 package com.mina.dog.breed.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,15 +43,10 @@ public class BreedListFragment : Fragment(), BreedListItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
         observeViewStates()
-        observeViewEvents()
         with(binding) {
             breedList.adapter = adapter
             breedList.layoutManager = LinearLayoutManager(context)
         }
-    }
-
-    private fun observeViewEvents() {
-
     }
 
     private fun observeViewStates() {
@@ -58,7 +54,7 @@ public class BreedListFragment : Fragment(), BreedListItemClickListener {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.viewState.collect {
                     binding.textView.visibility = View.VISIBLE
-                    when(it) {
+                    when (it) {
                         is BreedListViewModel.ViewState.Content -> {
                             binding.textView.visibility = View.GONE
                             adapter.updateAdapter(it.breeds)

@@ -5,8 +5,11 @@ import com.mina.dog.breed.storage.BreedDao
 import com.mina.dog.breed.storage.BreedEntity
 import com.mina.dog.network.BreedListResponse
 import com.mina.dog.network.DogService
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 
@@ -27,14 +30,31 @@ internal class BreedListRepository @Inject constructor(
                 if (result.isSuccess) {
                     val breedListResponse: BreedListResponse = result.getOrThrow()
                     val breedList: List<Breed> = converter.convert(breedListResponse)
-                    persistBreeds(breedList)
-                    BreedListRepositoryResult.Success(breedList)
+                    val breedListWithImages: List<Breed> = images(breedList)
+                    persistBreeds(breedListWithImages)
+                    BreedListRepositoryResult.Success(breedListWithImages)
                 } else {
                     throw Exception()
                 }
             }
         } catch (exception: Exception) {
             return BreedListRepositoryResult.Error(exception)
+        }
+    }
+
+    private suspend fun images(breedList: List<Breed>): List<Breed> {
+        return supervisorScope {
+            val deferred = breedList.map { breed ->
+                async {
+                    return@async Pair(breed, dogService.getBreedImages(breed.name))
+                }
+            }
+
+            deferred
+                .awaitAll()
+                .map {
+                    it.first.copy(images = it.second.getOrThrow().images)
+                }
         }
     }
 

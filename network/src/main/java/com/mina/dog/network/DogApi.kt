@@ -8,6 +8,6 @@ internal interface DogApi {
     @GET("breeds/list/all")
     suspend fun breeds(): Response<BreedListResponse>
 
-    @GET("breed/{breed}/images")
+    @GET("breed/{breed}/images/random/5")
     suspend fun breedImages(@Path("breed") breed: String): Response<BreedImagesResponse>
 }

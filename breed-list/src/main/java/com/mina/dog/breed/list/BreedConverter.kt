@@ -13,17 +13,18 @@ internal class BreedConverter @Inject constructor() {
         .toList()
         .map { breedPair ->
             val subBreeds: List<SubBreed> = breedPair.second.map { SubBreed(name = it) }
-            Breed(name = breedPair.first, subBreeds = subBreeds)
+            Breed(name = breedPair.first, subBreeds = subBreeds, images = emptyList())
         }
 
     fun convert(breedEntity: BreedEntity) = Breed(
         name = breedEntity.name,
-        subBreeds = breedEntity.subBreeds.map { SubBreed(name = it) }
+        subBreeds = breedEntity.subBreeds.map { SubBreed(name = it) },
+        images = breedEntity.images
     )
 
     fun convert(breed: Breed): BreedEntity = BreedEntity(
         name = breed.name,
         subBreeds = breed.subBreeds.map { it.name },
-        images = emptyList()
+        images = breed.images
     )
 }
