@@ -9,6 +9,7 @@ dependencies {
 
     implementation(project(":common-models"))
     implementation(project(":common-ui"))
+    implementation(project(":storage"))
 
     implementation(Libraries.App.AndroidX.appcompat)
     implementation(Libraries.App.Kotlin.stdlib)
