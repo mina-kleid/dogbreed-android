@@ -19,6 +19,7 @@ dependencies {
     implementation(Libraries.App.Navigation.ui)
     implementation(Libraries.App.Navigation.dynamicFeatures)
     implementation(Libraries.App.Hilt.core)
+    implementation(Libraries.App.glide)
 
     kapt(Libraries.App.Hilt.compiler)
 }

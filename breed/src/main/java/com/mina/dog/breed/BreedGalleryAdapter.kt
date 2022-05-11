@@ -4,21 +4,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import javax.inject.Inject
 
-internal class BreedGalleryAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+internal class BreedGalleryAdapter @Inject constructor(
+    private val requestOptions: RequestOptions
+) : RecyclerView.Adapter<BreedGalleryViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    private var images: MutableList<String> = mutableListOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedGalleryViewHolder {
         val itemView: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.breed_gallery_item, parent, false)
-        return BreedGalleryViewHolder(itemView)
+        return BreedGalleryViewHolder(itemView, requestOptions)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+    override fun onBindViewHolder(holder: BreedGalleryViewHolder, position: Int) {
+        val imageUrl: String = images[position]
+        holder.bind(imageUrl)
     }
 
     override fun getItemCount(): Int {
-        return 0
+        return images.size
+    }
+
+    fun updateItems(images: List<String>) {
+        this.images.clear()
+        this.images.addAll(images)
+        notifyDataSetChanged()
     }
 }
