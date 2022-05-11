@@ -45,7 +45,7 @@ internal class BreedListViewModel @Inject constructor(
     }
 
     fun breedClicked(breed: Breed) {
-        val uriString = "android-app://com.mina.dog/breed"
+        val uriString = "android-app://com.mina.dog/breed?breed_name=${breed.name}"
         viewModelScope.launch {
             _viewEvent.send(ViewEvent.Navigate(uriString = uriString))
         }

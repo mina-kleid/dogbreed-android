@@ -10,6 +10,8 @@
         android:name="com.mina.dog.breed.BreedFragment"
         tools:layout="@layout/breed_fragment" >
 
-        <deepLink app:uri="android-app://com.mina.dog/breed" />
+        <argument android:name="breed_name" app:argType="string" app:nullable="false"/>
+
+        <deepLink app:uri="android-app://com.mina.dog/breed?breed_name={breed_name}" />
     </fragment>
 </navigation>
