@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.mina.dog.breed.common.models.Breed
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 internal class BreedListViewModel @Inject constructor(
     private val breedListRepository: BreedListRepository,
-    private val breedImageRepository: BreedImageRepository
+    private val breedImageRepository: BreedImageRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) :
     ViewModel(),
     DefaultLifecycleObserver {
@@ -26,7 +28,7 @@ internal class BreedListViewModel @Inject constructor(
     override fun onCreate(owner: LifecycleOwner) {
         _viewState.value = ViewState.Loading
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
+            withContext(dispatcher) {
                 _viewState.value = when (val result = breedListRepository.loadBreeds()) {
                     is BreedListRepository.BreedListRepositoryResult.Success -> {
                         val breedsWithUpdatedImages = updateImages(result.breeds)
@@ -39,7 +41,7 @@ internal class BreedListViewModel @Inject constructor(
     }
 
     private suspend fun updateImages(breeds: List<Breed>): List<Breed> {
-        val breedsWithImages: List<Breed> = try {
+        val breedsWithUpdatedImages: List<Breed> = try {
             breeds
                 .filter { it.images.isEmpty() }
                 .run { breedImageRepository.images(this) }
@@ -49,8 +51,9 @@ internal class BreedListViewModel @Inject constructor(
         }
 
         return breeds
-            .filterNot { it.images.isEmpty() } + breedsWithImages
-            .sortedBy { it.name }
+            .toMutableSet()
+            .apply { this.addAll(breedsWithUpdatedImages) }
+            .toList()
     }
 
     sealed class ViewState {

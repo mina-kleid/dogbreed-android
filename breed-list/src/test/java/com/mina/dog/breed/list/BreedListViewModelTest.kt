@@ -4,7 +4,9 @@ import app.cash.turbine.test
 import com.mina.dog.breed.common.models.Breed
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -16,9 +18,14 @@ internal class BreedListViewModelTest {
     @get:Rule
     var coroutineTestRule = CoroutineTestRule()
 
-    private val repository: BreedListRepository = mock()
+    private val listRepository: BreedListRepository = mock()
+    private val imageRepository: BreedImageRepository = mock()
 
-    private val viewModel = BreedListViewModel(breedListRepository = repository)
+    private val viewModel = BreedListViewModel(
+        breedListRepository = listRepository,
+        breedImageRepository = imageRepository,
+        dispatcher = TestCoroutineDispatcher()
+    )
 
 
     @Test
@@ -29,10 +36,10 @@ internal class BreedListViewModelTest {
                 assertEquals(expectMostRecentItem(), BreedListViewModel.ViewState.Loading)
             }
     }
-    
+
     @Test
-    fun `viewState should emit error when repository returns error`() = runBlockingTest {
-        given(repository.loadBreeds())
+    fun `viewState should emit error when list repository returns error`() = runBlockingTest {
+        given(listRepository.loadBreeds())
             .willReturn(BreedListRepository.BreedListRepositoryResult.Error(Exception()))
 
         viewModel.onCreate(mock())
@@ -46,9 +53,31 @@ internal class BreedListViewModelTest {
 
     @Test
     fun `viewState should emit content`() = runBlockingTest {
-        val breedList: List<Breed> = mock()
-        given(repository.loadBreeds())
+        val breed = Breed("test", emptyList(), emptyList())
+        val breedList: List<Breed> = listOf(breed)
+        given(listRepository.loadBreeds())
             .willReturn(BreedListRepository.BreedListRepositoryResult.Success(breedList))
+        given(imageRepository.images(breedList)).willReturn(breedList)
+
+        viewModel.onCreate(mock())
+
+        viewModel
+            .viewState
+            .test {
+                assertEquals(
+                    expectMostRecentItem(),
+                    BreedListViewModel.ViewState.Content(breedList)
+                )
+            }
+    }
+
+    @Test
+    fun `viewState should emit content when image repository throws exception`() = runBlockingTest {
+        val breed = Breed("test", emptyList(), emptyList())
+        val breedList: List<Breed> = listOf(breed)
+        given(listRepository.loadBreeds())
+            .willReturn(BreedListRepository.BreedListRepositoryResult.Success(breedList))
+        given(imageRepository.images(breedList)).willAnswer { throw Exception() }
 
         viewModel.onCreate(mock())
 

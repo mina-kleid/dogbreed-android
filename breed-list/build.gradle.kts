@@ -4,6 +4,12 @@ plugins {
     kotlin("kapt")
 }
 
+android {
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+}
+
 dependencies {
 
     implementation(project(":breed-item"))
