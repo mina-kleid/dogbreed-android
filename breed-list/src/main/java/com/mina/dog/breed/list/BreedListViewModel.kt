@@ -11,7 +11,10 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-internal class BreedListViewModel @Inject constructor(private val breedListRepository: BreedListRepository) :
+internal class BreedListViewModel @Inject constructor(
+    private val breedListRepository: BreedListRepository,
+    private val breedImageRepository: BreedImageRepository
+) :
     ViewModel(),
     DefaultLifecycleObserver {
 
@@ -25,11 +28,7 @@ internal class BreedListViewModel @Inject constructor(private val breedListRepos
             withContext(Dispatchers.IO) {
                 _viewState.value = when (val result = breedListRepository.loadBreeds()) {
                     is BreedListRepository.BreedListRepositoryResult.Success -> {
-                        if (result.breeds.isEmpty()) {
-                            ViewState.Empty
-                        } else {
-                            ViewState.Content(result.breeds)
-                        }
+                        viewState(result.breeds)
                     }
                     is BreedListRepository.BreedListRepositoryResult.Error -> ViewState.Error
                 }
@@ -37,10 +36,14 @@ internal class BreedListViewModel @Inject constructor(private val breedListRepos
         }
     }
 
+    private suspend fun viewState(breeds: List<Breed>): ViewState {
+        val breedListWithImages = breedImageRepository.images(breeds)
+        return ViewState.Content(breedListWithImages)
+    }
+
     sealed class ViewState {
         data class Content(val breeds: List<Breed>) : ViewState()
         object Loading : ViewState()
         object Error : ViewState()
-        object Empty : ViewState()
     }
 }

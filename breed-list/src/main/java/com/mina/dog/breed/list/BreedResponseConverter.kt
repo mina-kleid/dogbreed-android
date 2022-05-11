@@ -6,7 +6,7 @@ import com.mina.dog.breed.storage.BreedEntity
 import com.mina.dog.network.BreedListResponse
 import javax.inject.Inject
 
-internal class BreedConverter @Inject constructor() {
+internal class BreedResponseConverter @Inject constructor() {
 
     fun convert(response: BreedListResponse): List<Breed> = response
         .breeds
@@ -16,15 +16,4 @@ internal class BreedConverter @Inject constructor() {
             Breed(name = breedPair.first, subBreeds = subBreeds, images = emptyList())
         }
 
-    fun convert(breedEntity: BreedEntity) = Breed(
-        name = breedEntity.name,
-        subBreeds = breedEntity.subBreeds.map { SubBreed(name = it) },
-        images = breedEntity.images
-    )
-
-    fun convert(breed: Breed): BreedEntity = BreedEntity(
-        name = breed.name,
-        subBreeds = breed.subBreeds.map { it.name },
-        images = breed.images
-    )
 }

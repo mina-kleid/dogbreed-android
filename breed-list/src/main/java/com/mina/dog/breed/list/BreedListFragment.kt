@@ -61,8 +61,6 @@ public class BreedListFragment : Fragment(), BreedListItemClickListener {
                         }
                         BreedListViewModel.ViewState.Loading ->
                             binding.textView.text = getString(R.string.list_loading)
-                        BreedListViewModel.ViewState.Empty ->
-                            binding.textView.text = getString(R.string.list_empty)
                         BreedListViewModel.ViewState.Error ->
                             binding.textView.text = getString(R.string.list_error)
                     }
