@@ -18,8 +18,8 @@ interface BreedDao {
     @Query("SELECT * FROM breed where name = :name LIMIT 1")
     suspend fun getBreed(name: String): BreedEntity?
 
-    @Insert(onConflict = REPLACE)
-    suspend fun insert(breedEntity: BreedEntity)
+    @Update
+    suspend fun updateAll(breeds: List<BreedEntity>)
 
     @Insert
     suspend fun insertAll(breeds: List<BreedEntity>)

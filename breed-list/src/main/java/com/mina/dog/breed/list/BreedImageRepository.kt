@@ -17,11 +17,12 @@ internal class BreedImageRepository @Inject constructor(
 
     suspend fun images(breedList: List<Breed>): List<Breed> {
         return supervisorScope {
-            val deferred = breedList.map { breed ->
-                async {
-                    return@async Pair(breed, dogService.getBreedImages(breed.name))
+            val deferred = breedList
+                .map { breed ->
+                    async {
+                        return@async Pair(breed, dogService.getBreedImages(breed.name))
+                    }
                 }
-            }
 
             deferred
                 .awaitAll()
@@ -29,11 +30,12 @@ internal class BreedImageRepository @Inject constructor(
                 .map {
                     it.first.copy(images = it.second.getOrThrow().images)
                 }
+                .apply { updateBreeds(this) }
         }
     }
 
     private suspend fun updateBreeds(breeds: List<Breed>) {
         val breedEntities: List<BreedEntity> = breeds.map { entityConverter.convert(it) }
-        breedDao.insertAll(breedEntities)
+        breedDao.updateAll(breedEntities)
     }
 }

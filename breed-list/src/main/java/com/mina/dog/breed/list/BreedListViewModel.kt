@@ -1,5 +1,6 @@
 package com.mina.dog.breed.list
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.mina.dog.breed.common.models.Breed
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +29,8 @@ internal class BreedListViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 _viewState.value = when (val result = breedListRepository.loadBreeds()) {
                     is BreedListRepository.BreedListRepositoryResult.Success -> {
-                        viewState(result.breeds)
+                        val breedsWithUpdatedImages = updateImages(result.breeds)
+                        ViewState.Content(breedsWithUpdatedImages)
                     }
                     is BreedListRepository.BreedListRepositoryResult.Error -> ViewState.Error
                 }
@@ -36,9 +38,19 @@ internal class BreedListViewModel @Inject constructor(
         }
     }
 
-    private suspend fun viewState(breeds: List<Breed>): ViewState {
-        val breedListWithImages = breedImageRepository.images(breeds)
-        return ViewState.Content(breedListWithImages)
+    private suspend fun updateImages(breeds: List<Breed>): List<Breed> {
+        val breedsWithImages: List<Breed> = try {
+            breeds
+                .filter { it.images.isEmpty() }
+                .run { breedImageRepository.images(this) }
+        } catch (e: Exception) {
+            Log.e("Error", e.localizedMessage)
+            emptyList()
+        }
+
+        return breeds
+            .filterNot { it.images.isEmpty() } + breedsWithImages
+            .sortedBy { it.name }
     }
 
     sealed class ViewState {
