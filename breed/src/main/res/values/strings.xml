@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="sub_breeds_header">Sub breeds: </string>
+    <string name="sub_breeds_empty">Unfortunately this breed has no sub breeds </string>
+    <string name="view_error">There is an error, Please try again later</string>
+    <string name="view_loading">Loading</string>
 </resources>
