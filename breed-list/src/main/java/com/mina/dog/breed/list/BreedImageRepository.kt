@@ -1,6 +1,7 @@
 package com.mina.dog.breed.list
 
 import com.mina.dog.breed.common.models.Breed
+import com.mina.dog.breed.common.models.BreedEntityConverter
 import com.mina.dog.breed.storage.BreedDao
 import com.mina.dog.breed.storage.BreedEntity
 import com.mina.dog.network.DogService

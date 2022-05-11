@@ -5,6 +5,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":storage"))
+
     implementation(Libraries.App.Kotlin.stdlib)
     implementation(Libraries.App.Hilt.core)
 

@@ -1,12 +1,11 @@
 package com.mina.dog.breed.list
 
 import com.mina.dog.breed.common.models.Breed
+import com.mina.dog.breed.common.models.BreedEntityConverter
 import com.mina.dog.breed.storage.BreedDao
 import com.mina.dog.breed.storage.BreedEntity
-import com.mina.dog.network.BreedImagesResponse
 import com.mina.dog.network.BreedListResponse
 import com.mina.dog.network.DogService
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify

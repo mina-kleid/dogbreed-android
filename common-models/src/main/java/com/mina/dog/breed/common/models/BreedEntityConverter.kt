@@ -1,11 +1,9 @@
-package com.mina.dog.breed.list
+package com.mina.dog.breed.common.models
 
-import com.mina.dog.breed.common.models.Breed
-import com.mina.dog.breed.common.models.SubBreed
 import com.mina.dog.breed.storage.BreedEntity
 import javax.inject.Inject
 
-internal class BreedEntityConverter @Inject constructor() {
+public class BreedEntityConverter @Inject constructor() {
 
     fun convert(breedEntity: BreedEntity): Breed = Breed(
         name = breedEntity.name,
