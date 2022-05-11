@@ -36,6 +36,7 @@ android {
 dependencies {
     implementation(project(":breed-item"))
     implementation(project(":breed-list"))
+    implementation(project(":breed"))
 
     implementation(Libraries.App.AndroidX.appcompat)
     implementation(Libraries.App.AndroidX.material)

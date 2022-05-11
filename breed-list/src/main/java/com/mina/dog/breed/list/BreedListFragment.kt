@@ -1,7 +1,7 @@
 package com.mina.dog.breed.list
 
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mina.dog.breed.common.models.Breed
 import com.mina.dog.breed.list.databinding.BreedListFragmentBinding
@@ -43,9 +44,25 @@ public class BreedListFragment : Fragment(), BreedListItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycle.addObserver(viewModel)
         observeViewStates()
+        observeViewEvents()
         with(binding) {
             breedList.adapter = adapter
             breedList.layoutManager = LinearLayoutManager(context)
+        }
+    }
+
+    private fun observeViewEvents() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.viewEvent.collect {
+                    when (it) {
+                        is BreedListViewModel.ViewEvent.Navigate -> {
+                            val uri = Uri.parse(it.uriString)
+                            findNavController().navigate(uri)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -70,7 +87,7 @@ public class BreedListFragment : Fragment(), BreedListItemClickListener {
     }
 
     override fun onItemClicked(breed: Breed) {
-
+        viewModel.breedClicked(breed)
     }
 
 }

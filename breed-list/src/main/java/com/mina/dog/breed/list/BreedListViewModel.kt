@@ -6,8 +6,10 @@ import com.mina.dog.breed.common.models.Breed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -24,6 +26,8 @@ internal class BreedListViewModel @Inject constructor(
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Loading)
     val viewState: Flow<ViewState> get() = _viewState
 
+    private val _viewEvent: Channel<ViewEvent> = Channel(Channel.CONFLATED)
+    val viewEvent: Flow<ViewEvent> = _viewEvent.receiveAsFlow()
 
     override fun onCreate(owner: LifecycleOwner) {
         _viewState.value = ViewState.Loading
@@ -37,6 +41,13 @@ internal class BreedListViewModel @Inject constructor(
                     is BreedListRepository.BreedListRepositoryResult.Error -> ViewState.Error
                 }
             }
+        }
+    }
+
+    fun breedClicked(breed: Breed) {
+        val uriString = "android-app://com.mina.dog/breed"
+        viewModelScope.launch {
+            _viewEvent.send(ViewEvent.Navigate(uriString = uriString))
         }
     }
 
@@ -60,5 +71,10 @@ internal class BreedListViewModel @Inject constructor(
         data class Content(val breeds: List<Breed>) : ViewState()
         object Loading : ViewState()
         object Error : ViewState()
+    }
+
+    sealed class ViewEvent {
+        data class Navigate(val uriString: String) : ViewEvent()
+
     }
 }
