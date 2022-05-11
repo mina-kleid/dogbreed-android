@@ -16,7 +16,7 @@ import javax.inject.Inject
 internal class BreedListViewModel @Inject constructor(
     private val breedListRepository: BreedListRepository,
     private val breedImageRepository: BreedImageRepository,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher
 ) :
     ViewModel(),
     DefaultLifecycleObserver {

@@ -19,9 +19,12 @@ dependencies {
     implementation(project(":storage"))
 
     implementation(Libraries.App.AndroidX.appcompat)
+    implementation(Libraries.App.AndroidX.recyclerView)
+    implementation(Libraries.App.AndroidX.constraintLayout)
     implementation(Libraries.App.Kotlin.stdlib)
     implementation(Libraries.App.Lifecycle.viewModel)
     implementation(Libraries.App.Lifecycle.runtime)
+    implementation(Libraries.App.Navigation.fragment)
     implementation(Libraries.App.Hilt.core)
 
     kapt(Libraries.App.Hilt.compiler)
