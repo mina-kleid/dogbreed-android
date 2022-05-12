@@ -14,18 +14,18 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/viewGroup"
-            app:constraint_referenced_ids="imageGallery,subBreedHeader,subBreeds"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
+            app:constraint_referenced_ids="imageGallery,subBreedHeader,subBreeds" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/imageGallery"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/recycler_view_height"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,8 +34,8 @@
             android:id="@+id/subBreedHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/gap"
             android:layout_marginTop="@dimen/double_gap"
+            android:layout_marginBottom="@dimen/gap"
             android:text="@string/sub_breeds_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
