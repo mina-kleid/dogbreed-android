@@ -6,4 +6,13 @@ public data class Breed(
     val images: List<String>
 ) {
     fun imageUrl(): String? = images.firstOrNull()
+
+    override fun equals(other: Any?): Boolean {
+        if (other is Breed) {
+            return this.name == other.name
+        }
+        return false
+    }
+
+    override fun hashCode(): Int = name.hashCode()
 }

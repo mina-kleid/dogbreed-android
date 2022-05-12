@@ -57,8 +57,10 @@ internal class BreedListViewModel @Inject constructor(
             .run { breedImageRepository.images(this) }
 
         return breeds
-            .filterNot { it.images.isEmpty() } + breedsWithUpdatedImages
-
+            .toMutableList()
+            .apply { removeAll(breedsWithUpdatedImages) } +
+            breedsWithUpdatedImages
+            .sortedBy { it.name }
     }
 
     sealed class ViewState {

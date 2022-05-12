@@ -2,6 +2,7 @@ package com.mina.dog.breed.list
 
 import app.cash.turbine.test
 import com.mina.dog.breed.common.models.Breed
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.Dispatchers
@@ -68,6 +69,35 @@ internal class BreedListViewModelTest {
                     expectMostRecentItem(),
                     BreedListViewModel.ViewState.Content(breedList)
                 )
+            }
+    }
+
+    @Test
+    fun `should update breeds list with images from image repository`() = runBlockingTest {
+        val breedWithoutImage = Breed("test1", emptyList(), emptyList())
+        val breedWithImage = Breed("test2", emptyList(), listOf("image2"))
+        val breedList: List<Breed> = listOf(breedWithImage, breedWithoutImage)
+
+        given(listRepository.loadBreeds())
+            .willReturn(BreedListRepository.BreedListRepositoryResult.Success(breedList))
+        given(imageRepository.images(listOf(breedWithoutImage))).willReturn(
+            listOf(breedWithoutImage.copy(images = listOf("image1")))
+        )
+
+        viewModel.onCreate(mock())
+
+        viewModel
+            .viewState
+            .test {
+                val viewState = expectMostRecentItem()
+                assertEquals(
+                    viewState,
+                    BreedListViewModel.ViewState.Content(
+                        listOf(breedWithImage, breedWithoutImage)
+                    )
+                )
+                val breeds: List<Breed> = (viewState as BreedListViewModel.ViewState.Content).breeds
+                assertEquals(breeds[1].images, listOf("image1"))
             }
     }
 }
