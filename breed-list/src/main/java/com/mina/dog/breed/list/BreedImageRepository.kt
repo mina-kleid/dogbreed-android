@@ -1,5 +1,6 @@
 package com.mina.dog.breed.list
 
+import android.util.Log
 import com.mina.dog.breed.common.models.Breed
 import com.mina.dog.breed.common.models.BreedEntityConverter
 import com.mina.dog.breed.storage.BreedDao
@@ -24,14 +25,18 @@ internal class BreedImageRepository @Inject constructor(
                         return@async Pair(breed, dogService.getBreedImages(breed.name))
                     }
                 }
-
-            deferred
-                .awaitAll()
-                .filter { it.second.isSuccess }
-                .map {
-                    it.first.copy(images = it.second.getOrThrow().images)
-                }
-                .apply { updateBreeds(this) }
+            try {
+                deferred
+                    .awaitAll()
+                    .filter { it.second.isSuccess }
+                    .map {
+                        it.first.copy(images = it.second.getOrThrow().images)
+                    }
+                    .apply { updateBreeds(this) }
+            } catch (e: Exception) {
+                Log.e("Error", e.localizedMessage)
+                emptyList()
+            }
         }
     }
 

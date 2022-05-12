@@ -70,24 +70,4 @@ internal class BreedListViewModelTest {
                 )
             }
     }
-
-    @Test
-    fun `viewState should emit content when image repository throws exception`() = runBlockingTest {
-        val breed = Breed("test", emptyList(), emptyList())
-        val breedList: List<Breed> = listOf(breed)
-        given(listRepository.loadBreeds())
-            .willReturn(BreedListRepository.BreedListRepositoryResult.Success(breedList))
-        given(imageRepository.images(breedList)).willAnswer { throw Exception() }
-
-        viewModel.onCreate(mock())
-
-        viewModel
-            .viewState
-            .test {
-                assertEquals(
-                    expectMostRecentItem(),
-                    BreedListViewModel.ViewState.Content(breedList)
-                )
-            }
-    }
 }

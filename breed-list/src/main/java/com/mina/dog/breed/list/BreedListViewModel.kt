@@ -52,14 +52,9 @@ internal class BreedListViewModel @Inject constructor(
     }
 
     private suspend fun updateImages(breeds: List<Breed>): List<Breed> {
-        val breedsWithUpdatedImages: List<Breed> = try {
-            breeds
+        val breedsWithUpdatedImages: List<Breed> = breeds
                 .filter { it.images.isEmpty() }
                 .run { breedImageRepository.images(this) }
-        } catch (e: Exception) {
-            Log.e("Error", e.localizedMessage)
-            emptyList()
-        }
 
         return breeds
             .toMutableSet()
