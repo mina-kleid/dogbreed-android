@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             app:constraint_referenced_ids="imageGallery,subBreedHeader,subBreeds" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.compose.ui.platform.ComposeView
             android:id="@+id/imageGallery"
             android:layout_width="0dp"
             android:layout_height="@dimen/recycler_view_height"

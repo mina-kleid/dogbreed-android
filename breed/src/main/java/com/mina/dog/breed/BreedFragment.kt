@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mina.dog.breed.databinding.BreedFragmentBinding
+import com.mina.dog.breed.view.BreedImageGallery
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -44,14 +45,6 @@ class BreedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.initialize(args.breedName)
         observeViewState()
-
-
-        binding.imageGallery.adapter = adapter
-        binding.imageGallery.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
     }
 
     private fun observeViewState() {
@@ -86,7 +79,9 @@ class BreedFragment : Fragment() {
             subBreeds.text =
                 if (content.subBreeds.isEmpty()) getString(R.string.sub_breeds_empty) else content.subBreeds
 
-            adapter.updateItems(content.images)
+            binding.imageGallery.setContent {
+                BreedImageGallery(images = content.images)
+            }
         }
     }
 }
