@@ -8,7 +8,7 @@ import com.mina.dog.breed.list.BreedListFragment
 internal class TabCollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     private val tabCount: Int = 2
-    private val tabs: List<Tab> = listOf(
+    val tabs: List<Tab> = listOf(
         Tab("Breeds", TabFragment.BREEDS),
         Tab("Favorites", TabFragment.NOT_IMPLEMENTED),
     )
