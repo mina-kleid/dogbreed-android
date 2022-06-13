@@ -6,6 +6,8 @@ object Versions {
     const val coroutineVersion = "1.4.3"
     const val hiltVersion = "2.40"
     const val kotlinVersion = "1.6.10"
+    const val composeVersion = "1.1.1"
+    const val lifecycleVersion = "2.4.1"
 }
 
 object SdkVersion {
@@ -33,7 +35,8 @@ object Libraries {
         object Hilt {
             const val core = "com.google.dagger:hilt-android:${Versions.hiltVersion}"
             const val compiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}"
-            const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}"
+            const val gradlePlugin =
+                "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}"
         }
 
         object Kotlin {
@@ -43,9 +46,12 @@ object Libraries {
 
         object Lifecycle {
 
-            const val common = "androidx.lifecycle:lifecycle-common-java8:2.4.0"
-            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
-            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+            const val common =
+                "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycleVersion}"
+            const val runtime =
+                "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleVersion}"
+            const val viewModel =
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}"
         }
 
         object Navigation {
@@ -78,6 +84,14 @@ object Libraries {
                     "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshiVersion}"
                 const val kotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}"
             }
+        }
+
+        object Compose {
+            const val activity = "androidx.activity:activity-compose:1.4.0"
+            const val materialDesign = "androidx.compose.material:material:${Versions.composeVersion}"
+            const val tooling = "androidx.compose.ui:ui-tooling:${Versions.composeVersion}"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleVersion}"
+            const val themeAdapter = "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
         }
 
         const val glide = "com.github.bumptech.glide:glide:4.11.0"
