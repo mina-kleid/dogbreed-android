@@ -6,22 +6,22 @@ import com.mina.dog.breed.list.BreedListFragment
 
 
 internal class TabCollectionAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+
+    private val tabCount: Int = 2
+    val tabs: List<Tab> = listOf(
+        Tab("Breeds", TabFragment.BREEDS),
+        Tab("Favorites", TabFragment.NOT_IMPLEMENTED),
+    )
+
     override fun getItemCount(): Int {
-        return TAB_COUNT
+        return tabCount
     }
 
 
-    override fun createFragment(position: Int): Fragment {
-
-        return TABS[position].fragment
-    }
-
-    companion object {
-        const val TAB_COUNT: Int = 2
-        val TABS: List<Tab> = listOf(
-            Tab("Breeds", BreedListFragment()),
-            Tab("Favorites", Fragment()),
-        )
-    }
+    override fun createFragment(position: Int): Fragment =
+        when (tabs[position].tabFragment) {
+            TabFragment.BREEDS -> BreedListFragment()
+            TabFragment.NOT_IMPLEMENTED -> Fragment()
+        }
 
 }

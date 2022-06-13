@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
         viewPager.adapter = tabCollectionAdapter
 
         TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
-            tab.text = TabCollectionAdapter.TABS[position].title
+            tab.text = tabCollectionAdapter.tabs[position].title
         }.attach()
 
         (requireActivity() as AppCompatActivity).supportActionBar?.title =
