@@ -94,7 +94,11 @@ object Libraries {
             const val themeAdapter = "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
         }
 
-        const val glide = "com.github.bumptech.glide:glide:4.11.0"
+        object Glide {
+            const val glide = "com.github.bumptech.glide:glide:4.13.2"
+            const val landscapist = "com.github.skydoves:landscapist-glide:1.5.2"
+        }
+
     }
 
     object Test {

@@ -6,7 +6,7 @@ plugins {
 
 dependencies {
 
-    implementation(Libraries.App.glide)
+    implementation(Libraries.App.Glide.glide)
     implementation(Libraries.App.Hilt.core)
 
     kapt(Libraries.App.Hilt.compiler)

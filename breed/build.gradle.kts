@@ -30,7 +30,7 @@ dependencies {
     implementation(Libraries.App.Navigation.ui)
     implementation(Libraries.App.Navigation.dynamicFeatures)
     implementation(Libraries.App.Hilt.core)
-    implementation(Libraries.App.glide)
+    implementation(Libraries.App.Glide.landscapist)
 
     //compose
     implementation(Libraries.App.Compose.activity)

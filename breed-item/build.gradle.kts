@@ -13,7 +13,7 @@ dependencies {
     implementation(Libraries.App.AndroidX.constraintLayout)
     implementation(Libraries.App.Kotlin.stdlib)
     implementation(Libraries.App.Hilt.core)
-    implementation(Libraries.App.glide)
+    implementation(Libraries.App.Glide.glide)
 
     kapt(Libraries.App.Hilt.compiler)
 }
