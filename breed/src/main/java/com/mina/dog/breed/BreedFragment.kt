@@ -33,9 +33,6 @@ class BreedFragment : Fragment() {
     private lateinit var binding: BreedFragmentBinding
 
     @Inject
-    internal lateinit var adapter: BreedGalleryAdapter
-
-    @Inject
     internal lateinit var requestOptions: RequestOptions
 
     override fun onCreateView(
