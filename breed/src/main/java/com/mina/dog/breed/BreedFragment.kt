@@ -7,17 +7,20 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.request.RequestOptions
 import com.mina.dog.breed.databinding.BreedFragmentBinding
 import com.mina.dog.breed.view.BreedImageGallery
+import com.skydoves.landscapist.glide.LocalGlideRequestOptions
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,6 +34,9 @@ class BreedFragment : Fragment() {
 
     @Inject
     internal lateinit var adapter: BreedGalleryAdapter
+
+    @Inject
+    internal lateinit var requestOptions: RequestOptions
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,7 +86,9 @@ class BreedFragment : Fragment() {
                 if (content.subBreeds.isEmpty()) getString(R.string.sub_breeds_empty) else content.subBreeds
 
             binding.imageGallery.setContent {
-                BreedImageGallery(images = content.images)
+                CompositionLocalProvider(LocalGlideRequestOptions provides requestOptions) {
+                    BreedImageGallery(images = content.images)
+                }
             }
         }
     }
