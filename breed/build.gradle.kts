@@ -37,6 +37,7 @@ dependencies {
     implementation(Libraries.App.Compose.materialDesign)
     implementation(Libraries.App.Compose.tooling)
     implementation(Libraries.App.Compose.themeAdapter)
+    implementation(Libraries.App.Compose.viewModel)
 
     kapt(Libraries.App.Hilt.compiler)
 }
