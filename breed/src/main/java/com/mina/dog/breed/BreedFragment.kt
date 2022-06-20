@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.request.RequestOptions
 import com.mina.dog.breed.view.BreedDetail
+import com.skydoves.landscapist.glide.LocalGlideRequestOptions
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,7 +36,10 @@ class BreedFragment : Fragment() {
             )
 
             setContent {
-                BreedDetail()
+                CompositionLocalProvider(LocalGlideRequestOptions provides requestOptions) {
+                    BreedDetail()
+                }
+
             }
         }
     }

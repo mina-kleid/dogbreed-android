@@ -30,12 +30,12 @@ internal class BreedViewModel @Inject constructor(
 
     private fun content(breed: Breed): ViewState.Content = ViewState.Content(
         title = breed.name,
-        subBreeds = breed.subBreeds.joinToString(separator = "\n") { it.name },
+        subBreeds = if (breed.subBreeds.isEmpty()) null else breed.subBreeds.joinToString(separator = "\n") { it.name },
         images = breed.images
     )
 
     sealed class ViewState {
-        data class Content(val title: String, val subBreeds: String, val images: List<String>) :
+        data class Content(val title: String, val subBreeds: String?, val images: List<String>) :
             ViewState()
 
         object Loading : ViewState()
