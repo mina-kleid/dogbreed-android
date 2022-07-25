@@ -19,9 +19,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class BreedFragment : Fragment() {
 
-    private val viewModel: BreedViewModel by viewModels()
-    private val args: BreedFragmentArgs by navArgs()
-
     @Inject
     internal lateinit var requestOptions: RequestOptions
 
@@ -42,11 +39,5 @@ class BreedFragment : Fragment() {
 
             }
         }
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.initialize(args.breedName)
     }
 }

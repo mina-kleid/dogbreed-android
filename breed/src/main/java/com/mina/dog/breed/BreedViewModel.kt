@@ -1,5 +1,6 @@
 package com.mina.dog.breed
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mina.dog.breed.common.models.Breed
@@ -11,14 +12,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class BreedViewModel @Inject constructor(
-    private val repository: BreedRepository
+    private val repository: BreedRepository,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Loading)
     val viewState: Flow<ViewState> get() = _viewState
 
-    fun initialize(breedName: String) {
+    init {
         try {
+            val breedName: String = savedStateHandle
+                .get("breed_name") ?: throw NullPointerException("Breed name argument not found")
             viewModelScope.launch {
                 val breed = repository.getBreed(breedName)
                 _viewState.value = content(breed)
