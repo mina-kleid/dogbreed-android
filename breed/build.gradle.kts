@@ -5,6 +5,17 @@ plugins {
     kotlin("kapt")
 }
 
+android {
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
+    }
+}
+
 dependencies {
 
     implementation(project(":common-models"))
@@ -19,7 +30,14 @@ dependencies {
     implementation(Libraries.App.Navigation.ui)
     implementation(Libraries.App.Navigation.dynamicFeatures)
     implementation(Libraries.App.Hilt.core)
-    implementation(Libraries.App.glide)
+    implementation(Libraries.App.Glide.landscapist)
+
+    //compose
+    implementation(Libraries.App.Compose.activity)
+    implementation(Libraries.App.Compose.materialDesign)
+    implementation(Libraries.App.Compose.tooling)
+    implementation(Libraries.App.Compose.themeAdapter)
+    implementation(Libraries.App.Compose.viewModel)
 
     kapt(Libraries.App.Hilt.compiler)
 }
