@@ -12,3 +12,18 @@ buildscript {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+subprojects {
+    tasks.withType(Test::class.java) {
+        testLogging {
+            events(
+                org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+            )
+            showCauses = true
+            showExceptions = true
+            showStackTraces = true
+            showStandardStreams =
+                true
+        }
+    }
+}
