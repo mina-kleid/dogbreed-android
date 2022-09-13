@@ -18,7 +18,6 @@ default_platform(:android)
 platform :android do
   desc "Runs all the tests"
   lane :test do
-    gradle(task: "assemble", flavor: "debug")
     gradle(task: "test", flavor: "debug")
   end
 end
