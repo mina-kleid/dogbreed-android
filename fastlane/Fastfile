@@ -20,4 +20,9 @@ platform :android do
   lane :test do
     gradle(task: "test", flavor: "debug")
   end
+
+  desc "Build"
+    lane :build do
+      gradle(task: "assemble", flavor: "debug")
+    end
 end
