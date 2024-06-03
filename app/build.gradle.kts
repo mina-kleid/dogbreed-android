@@ -31,6 +31,27 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+
+    signingConfigs {
+        create("release") {
+            keyAlias = "dog_breed"
+            keyPassword = "dog_breed"
+            storeFile = file("$projectDir/dog_breed_keystore.jks")
+            storePassword = "dog_breed"
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+    namespace = "com.mina.dog"
 }
 
 dependencies {

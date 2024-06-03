@@ -11,3 +11,6 @@ dependencies {
 
     kapt(Libraries.App.Hilt.compiler)
 }
+android {
+    namespace = "com.mina.dog.breed.common.ui"
+}

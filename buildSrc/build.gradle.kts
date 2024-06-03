@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    val gradleVersion = "7.1.3"
+    val gradleVersion = "7.4.2"
     val kotlinVersion = "1.6.10"
     implementation("com.android.tools.build:gradle:$gradleVersion")
     implementation("com.android.tools.build:gradle-api:$gradleVersion")

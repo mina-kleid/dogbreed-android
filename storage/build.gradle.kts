@@ -15,6 +15,7 @@ android {
             }
         }
     }
+    namespace = "com.mina.dog.breed.storage"
 }
 
 dependencies {

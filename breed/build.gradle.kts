@@ -14,6 +14,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.1.1"
     }
+    namespace = "com.mina.dog.breed"
 }
 
 dependencies {

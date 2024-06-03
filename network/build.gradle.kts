@@ -14,6 +14,7 @@ android {
             buildConfigField("String", "API_URL", "\"https://dog.ceo/api/\"")
         }
     }
+    namespace = "com.mina.dog.network"
 }
 
 dependencies {

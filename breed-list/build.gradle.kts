@@ -8,6 +8,7 @@ android {
     testOptions {
         unitTests.isReturnDefaultValues = true
     }
+    namespace = "com.mina.dog.breed.list"
 }
 
 dependencies {
